@@ -1,7 +1,7 @@
 import { fireBaseService } from "../../services/firebase";
 const colName = 'task'
 
-export const boardStore = {
+export const taskStore = {
     state: {
         tasks: null,
     },
@@ -18,11 +18,11 @@ export const boardStore = {
         setTasks(state, { tasks }) {
             state.tasks = tasks
         },
-        removeTask(state,{id}){
+        removeTask(state, { id }) {
             const idx = state.tasks.findIndex((task) => task._id === id)
-            state.tasks.splice(idx,1)
+            state.tasks.splice(idx, 1)
         },
-        saveTask(state,{task}){
+        saveTask(state, { task }) {
             const idx = state.tasks.findIndex((task) => task._id === id)
         }
     },
@@ -35,20 +35,20 @@ export const boardStore = {
                 console.log('loadTasks error', error)
             }
         },
-        async removeTask({commit},{id}){
+        async removeTask({ commit }, { id }) {
             try {
-                await fireBaseService.removeEntity(colName,id)
-                commit('removeTask',{id})
+                await fireBaseService.removeEntity(colName, id)
+                commit('removeTask', { id })
             } catch (error) {
                 console.log('removeTask error', error)
             }
         },
-        async saveTask({commit},{task}){
-            try{
-                await fireBaseService.saveEntity(colName,task)
-                commit('saveTask',{task})
-            } catch(error){
-                console.log('saveTask error',error)
+        async saveTask({ commit }, { task }) {
+            try {
+                await fireBaseService.saveEntity(colName, task)
+                commit('saveTask', { task })
+            } catch (error) {
+                console.log('saveTask error', error)
             }
         }
     },

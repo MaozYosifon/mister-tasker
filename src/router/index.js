@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import mainApp from '../views/main-app.vue'
+import taskerApp from '../views/tasker-app.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,9 +10,9 @@ const router = createRouter({
     //   component: HomeView
     // },
     {
-      path: '/main',
-      name: 'main-app',
-      component: mainApp
+      path: '/tasker',
+      name: 'tasker-app',
+      component: taskerApp
     },
   ]
 })

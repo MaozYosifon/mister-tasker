@@ -1,0 +1,19 @@
+.actions-btn {
+
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+
+    >span {
+        border-radius: 3px;
+        padding: 3px 5px;
+    }
+
+    .edit-btn {
+        background-color: lightgray;
+    }
+
+    .delete-btn {
+        background-color: lightcoral;
+    }
+}
