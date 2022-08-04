@@ -47,9 +47,7 @@ async function getEntityById(collectionName, id) {
     const docRef = doc(db, collectionName, id)
     try {
         const docSnap = await getDoc(docRef)
-        return {
-            _id: docSnap.id, ...docSnap.data()
-        }
+        return { _id: docSnap.id, ...docSnap.data() }
     } catch (error) {
         console.log('Had an getById error', error)
         throw (error)
@@ -71,14 +69,19 @@ async function saveEntity(collectionName, entity) {
     if (entity._id) {
         try {
             const docRef = doc(db, collectionName, entity._id)
-            return await updateDoc(docRef, entity)
+            const tempId = entity._id
+            delete entity._id
+            await updateDoc(docRef, entity)
+            return { _id: tempId, ...entity }
         } catch (error) {
             console.log('Had an updateEntity error', error)
             throw (error)
         }
     } else {
         try {
-            return await addDoc(collection(db, collectionName), entity)
+            const res = await addDoc(collection(db, collectionName), entity)
+            const resEntity = await getEntityById(collectionName,res.id)
+            return resEntity
         } catch (error) {
             console.log('Had an addEntity error', error)
             throw (error)
@@ -86,14 +89,14 @@ async function saveEntity(collectionName, entity) {
     }
 }
 
-function getEmptyEntity(){
+function getEmptyEntity() {
     return {
-        title:'',
-    description:'',
-    importance:1,
-    createdAt: Date.now(),
-    doneAt: null,
-    status:''
+        title: '',
+        description: '',
+        importance: 1,
+        createdAt: Date.now(),
+        doneAt: null,
+        status: ''
     }
 }
 

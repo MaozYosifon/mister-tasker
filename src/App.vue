@@ -22,10 +22,24 @@
    async created() {
      try {
        const tasks = await fireBaseService.query('task')
-       const task = await fireBaseService.getEntityById('task','v9KvicIUKyLJuSt5iSwN')
-       const empty = fireBaseService.getEmptyEntity()
-
-       console.log(empty);
+       console.log(tasks)
+       //  let task = await fireBaseService.getEntityById('task','v9KvicIUKyLJuSt5iSwN')
+       
+      //  const task = {
+      //    title: "secTest",
+      //    description: "description",
+      //    importance: 3,
+      //    status: "Active",
+      //    createdAt: {
+      //      seconds: 1659621452,
+      //      nanoseconds: 195000000
+      //    },
+      //    doneAt: {
+      //      seconds: 1659718670,
+      //      nanoseconds: 438000000
+      //    }
+      //  }
+      
      } catch (error) {
  
      }
