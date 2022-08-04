@@ -38,15 +38,69 @@ async function query(collectionName) {
             return { _id: doc.id, ...doc.data() }
         })
     } catch (error) {
-        console.log('Had an error', error);
+        console.log('Had an query error', error);
+        throw (error)
     }
 }
 
-async function getEntityById(collectionName) {
+async function getEntityById(collectionName, id) {
+    const docRef = doc(db, collectionName, id)
+    try {
+        const docSnap = await getDoc(docRef)
+        return {
+            _id: docSnap.id, ...docSnap.data()
+        }
+    } catch (error) {
+        console.log('Had an getById error', error)
+        throw (error)
+    }
+}
 
+async function removeEntity(collectionName, id) {
+    const docRef = doc(db, collectionName, id)
+    try {
+        deleteDoc(docRef)
+        console.log('Entity removed successfully')
+    } catch (error) {
+        console.log('Had an removeEntity error', error)
+        throw (error)
+    }
+}
+
+async function saveEntity(collectionName, entity) {
+    if (entity._id) {
+        try {
+            const docRef = doc(db, collectionName, entity._id)
+            return await updateDoc(docRef, entity)
+        } catch (error) {
+            console.log('Had an updateEntity error', error)
+            throw (error)
+        }
+    } else {
+        try {
+            return await addDoc(collection(db, collectionName), entity)
+        } catch (error) {
+            console.log('Had an addEntity error', error)
+            throw (error)
+        }
+    }
+}
+
+function getEmptyEntity(){
+    return {
+        title:'',
+    description:'',
+    importance:1,
+    createdAt: Date.now(),
+    doneAt: null,
+    status:''
+    }
 }
 
 export const fireBaseService = {
-    query
-
+    query,
+    getEntityById,
+    removeEntity,
+    saveEntity,
+    getEmptyEntity
 }

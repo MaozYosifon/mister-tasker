@@ -22,7 +22,10 @@
    async created() {
      try {
        const tasks = await fireBaseService.query('task')
-       console.log(tasks);
+       const task = await fireBaseService.getEntityById('task','v9KvicIUKyLJuSt5iSwN')
+       const empty = fireBaseService.getEmptyEntity()
+
+       console.log(empty);
      } catch (error) {
  
      }
