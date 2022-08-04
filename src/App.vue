@@ -8,21 +8,28 @@
   </div>
 </template>
  <script>
-import { RouterLink, RouterView } from 'vue-router'
-import mainHeader from './components/main-header.vue';
-
-export default {
-  name: 'app-vue',
-  components: {
-    mainHeader
-  },
-  data() {
-    return {};
-  },
-  created() { },
-  methods: {},
-  computed: {},
-  unmounted() { },
-};
-</script>
+ import { RouterLink, RouterView } from 'vue-router'
+ import mainHeader from './components/main-header.vue';
+ import { fireBaseService } from './services/firebase.js'
+ export default {
+   name: 'app-vue',
+   components: {
+     mainHeader
+   },
+   data() {
+     return {};
+   },
+   async created() {
+     try {
+       const tasks = await fireBaseService.query('task')
+       console.log(tasks);
+     } catch (error) {
+ 
+     }
+   },
+   methods: {},
+   computed: {},
+   unmounted() { },
+ };
+ </script>
 
