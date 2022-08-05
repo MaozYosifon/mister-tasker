@@ -1,7 +1,7 @@
 import { fireBaseService } from "../../services/firebase";
 const colName = 'task'
 
-export const boardStore = {
+export const taskStore = {
     state: {
         tasks: null,
     },
@@ -23,7 +23,12 @@ export const boardStore = {
             state.tasks.splice(idx,1)
         },
         saveTask(state,{task}){
-            const idx = state.tasks.findIndex((task) => task._id === id)
+            const idx = state.tasks.findIndex((t) => t._id === task.id)
+            if(idx !== -1){
+                state.tasks.splice(idx,1,task)
+            } else {
+                state.tasks.push(task)
+            }
         }
     },
     actions: {
