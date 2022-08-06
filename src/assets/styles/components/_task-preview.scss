@@ -7,6 +7,15 @@
     >span {
         border-radius: 3px;
         padding: 3px 5px;
+
+        &:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+    }
+
+    .details-btn {
+        background-color: lightblue
     }
 
     .edit-btn {

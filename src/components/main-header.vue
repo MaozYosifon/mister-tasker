@@ -1,7 +1,7 @@
 <template>
-    <header class="main-header">
+    <header class="main-header flex space-between align-center">
         <div class="logo">Logo Img</div>
-        <nav>
+        <nav class="flex align-center">
             <RouterLink to="/tasker">tasks</RouterLink>
             <RouterLink to="/">Page1</RouterLink>
             <RouterLink to="/">Page2</RouterLink>

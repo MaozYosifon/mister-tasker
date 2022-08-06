@@ -4,9 +4,13 @@
         <!-- <td>{{ task.description }}</td> -->
         <td>{{ task.importance }}</td>
         <td>{{ task.status }}</td>
-        <td>{{ task.createdAt.seconds }}</td>
-        <td>{{ task.doneAt.seconds }}</td>
-        <td class="actions-btn"><span class="edit-btn">Edit</span><span class="delete-btn">Delete</span></td>
+        <!-- <td>{{ task.createdAt.seconds }}</td>
+        <td>{{ task.doneAt.seconds }}</td> -->
+        <td class="actions-btn">
+            <span class="details-btn" @click="onDetails">Details</span>
+            <span class="edit-btn" @click="onEdit(task._id)">Edit</span>
+            <span class="delete-btn" @click="onDelete(task._id)">Delete</span>
+        </td>
     </tr>
 </template>
  <script>
@@ -20,7 +24,22 @@ export default {
         return {};
     },
     created() { },
-    methods: {},
+    methods: {
+        onDetails() {
+            console.log('click on details');
+            this.$emit('onDetails', this.task)
+
+        },
+        onEdit(taskId) {
+            console.log('click on edit', taskId);
+            this.$emit('onEdit', taskId)
+
+        },
+        onDelete(taskId) {
+            console.log('click on delete', taskId);
+            this.$store.dispatch({ type: 'removeTask', id: taskId })
+        },
+    },
     computed: {},
     unmounted() { },
 };
