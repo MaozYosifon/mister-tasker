@@ -22,8 +22,13 @@ export const taskStore = {
             const idx = state.tasks.findIndex((task) => task._id === id)
             state.tasks.splice(idx, 1)
         },
-        saveTask(state, { task }) {
-            const idx = state.tasks.findIndex((task) => task._id === id)
+        saveTask(state,{task}){
+            const idx = state.tasks.findIndex((t) => t._id === task.id)
+            if(idx !== -1){
+                state.tasks.splice(idx,1,task)
+            } else {
+                state.tasks.push(task)
+            }
         }
     },
     actions: {
