@@ -54,6 +54,7 @@ export default {
         };
     },
     created() {
+        console.log('Ye Maaaan')
     },
     methods: {
         saveTask() {
