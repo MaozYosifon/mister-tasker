@@ -3,7 +3,7 @@
         <div class="logo">Logo Img</div>
         <nav class="flex align-center">
             <RouterLink to="/tasker">tasks</RouterLink>
-            <RouterLink to="/">Page1</RouterLink>
+            <RouterLink to="/">Home</RouterLink>
             <RouterLink to="/">Page2</RouterLink>
         </nav>
     </header>
