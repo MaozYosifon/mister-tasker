@@ -35,11 +35,9 @@ export const taskStore = {
         },
         saveTask(state,{task}){
             const idx = state.tasks.findIndex((t) => t._id === task._id)
-            if(idx !== -1){
-                console.log('replace')
+            if(idx !== -1){           
                 state.tasks.splice(idx,1,task)
             } else {
-                console.log('add')
                 state.tasks.push(task)
             }
         },

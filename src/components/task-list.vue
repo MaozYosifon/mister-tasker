@@ -39,8 +39,6 @@ export default {
     created() { },
     methods: {
         openTaskModal(currTask, isEdit) {
-            // console.log(currTask)
-            console.log('currTask', currTask);
             this.isModalOpen = true
             this.modalContent = JSON.parse(JSON.stringify(currTask))
             this.modalContent.isEdit = isEdit
@@ -50,7 +48,6 @@ export default {
             this.modalContent = null
         },
         saveTask(task) {
-            console.log(task)
             this.$store.dispatch({ type: 'saveTask', task })
         },
         addTask() {

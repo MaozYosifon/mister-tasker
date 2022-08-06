@@ -26,15 +26,12 @@ export default {
     created() { },
     methods: {
         onDetails() {
-            console.log('click on details')
             this.$emit('openModal', this.task,false)
         },
         onEdit(taskId) {
-            console.log('click on edit');
             this.$emit('openModal', this.task,true)
         },
         onDelete(taskId) {
-            console.log('click on delete', taskId);
             this.$store.dispatch({ type: 'removeTask', id: taskId })
         },
     },
