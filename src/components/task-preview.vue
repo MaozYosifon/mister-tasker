@@ -8,7 +8,7 @@
         <td>{{ task.doneAt.seconds }}</td> -->
         <td class="actions-btn">
             <span class="details-btn" @click="onDetails">Details</span>
-            <span class="edit-btn" @click="onEdit(task._id)">Edit</span>
+            <span class="edit-btn" @click="onEdit">Edit</span>
             <span class="delete-btn" @click="onDelete(task._id)">Delete</span>
         </td>
     </tr>
@@ -26,14 +26,12 @@ export default {
     created() { },
     methods: {
         onDetails() {
-            console.log('click on details');
-            this.$emit('onDetails', this.task)
-
+            console.log('click on details')
+            this.$emit('openModal', this.task,false)
         },
         onEdit(taskId) {
-            console.log('click on edit', taskId);
-            this.$emit('onEdit', taskId)
-
+            console.log('click on edit');
+            this.$emit('openModal', this.task,true)
         },
         onDelete(taskId) {
             console.log('click on delete', taskId);

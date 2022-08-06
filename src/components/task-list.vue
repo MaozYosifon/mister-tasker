@@ -10,13 +10,13 @@
             <th>Actions</th>
         </thead>
         <tbody>
-            <task-preview v-for="task in tasks" :task="task" @onDetails="openModal" />
+            <task-preview v-for="task in tasks" :task="task" @openModal="openTaskModal" />
         </tbody>
         <div v-if="isModalOpen" class="modal">
-            <task-modal v-if="modalContent" :content="modalContent" />
+            <task-modal v-if="modalContent" :currTask="modalContent" @closeModal="closeModal" @saveTask="saveTask" />
         </div>
     </table>
-
+    <button v-if="!isModalOpen" @click="addTask">Add</button>
 </template>
  <script>
 import taskPreview from './task-preview.vue';
@@ -38,15 +38,25 @@ export default {
     },
     created() { },
     methods: {
-        openModal(currTask) {
+        openTaskModal(currTask, isEdit) {
+            // console.log(currTask)
             console.log('currTask', currTask);
             this.isModalOpen = true
-            this.modalContent = currTask
+            this.modalContent = JSON.parse(JSON.stringify(currTask))
+            this.modalContent.isEdit = isEdit
         },
         closeModal() {
             this.isModalOpen = false
             this.modalContent = null
         },
+        saveTask(task) {
+            console.log(task)
+            this.$store.dispatch({ type: 'saveTask', task })
+        },
+        addTask() {
+            this.isModalOpen = true
+            this.modalContent = this.$store.getters.getEmptyTask
+        }
 
     },
     computed: {},

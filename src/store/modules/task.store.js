@@ -12,6 +12,17 @@ export const taskStore = {
         getTask(state, id) {
             const idx = state.tasks.findIndex((task) => task._id === id)
             return JSON.parse(JSON.stringify(state.tasks[idx]))
+        },
+        getEmptyTask() {
+            return {
+                title: '',
+                description: '',
+                importance: 1,
+                createdAt: Date.now(),
+                doneAt: null,
+                status: 'new',
+                isEdit:true
+            }
         }
     },
     mutations: {
@@ -23,13 +34,15 @@ export const taskStore = {
             state.tasks.splice(idx, 1)
         },
         saveTask(state,{task}){
-            const idx = state.tasks.findIndex((t) => t._id === task.id)
+            const idx = state.tasks.findIndex((t) => t._id === task._id)
             if(idx !== -1){
+                console.log('replace')
                 state.tasks.splice(idx,1,task)
             } else {
+                console.log('add')
                 state.tasks.push(task)
             }
-        }
+        },
     },
     actions: {
         async loadTasks({ commit }) {
@@ -50,8 +63,8 @@ export const taskStore = {
         },
         async saveTask({ commit }, { task }) {
             try {
-                await fireBaseService.saveEntity(colName, task)
-                commit('saveTask', { task })
+               const resTask = await fireBaseService.saveEntity(colName, task)
+                commit('saveTask', { task:resTask })
             } catch (error) {
                 console.log('saveTask error', error)
             }

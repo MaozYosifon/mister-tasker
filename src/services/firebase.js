@@ -89,21 +89,21 @@ async function saveEntity(collectionName, entity) {
     }
 }
 
-function getEmptyEntity() {
-    return {
-        title: '',
-        description: '',
-        importance: 1,
-        createdAt: Date.now(),
-        doneAt: null,
-        status: ''
-    }
-}
+// function getEmptyEntity() {
+//     return {
+//         title: '',
+//         description: '',
+//         importance: 1,
+//         createdAt: Date.now(),
+//         doneAt: null,
+//         status: 'New'
+//     }
+// }
 
 export const fireBaseService = {
     query,
     getEntityById,
     removeEntity,
     saveEntity,
-    getEmptyEntity
+    // getEmptyEntity
 }
